@@ -1,5 +1,14 @@
 package gti310.tp3;
 
+import gti310.tp3.entities.RawData;
+import gti310.tp3.entities.TreatedData;
+import gti310.tp3.parser.ConcreteParser;
+import gti310.tp3.parser.Parser;
+import gti310.tp3.solver.ConcreteSolver;
+import gti310.tp3.solver.Solver;
+import gti310.tp3.writer.ConcreteWriter;
+import gti310.tp3.writer.Writer;
+
 /**
  * The Application class defines a template method to call the elements to
  * solve the problem Unreal-Networks is façing.
@@ -19,5 +28,17 @@ public class Application {
 	 */
 	public static void main(String args[]) {
 		System.out.println("Unreal Networks Solver !");
+		
+		// Read the file and parse the contained data in an accessible format
+		Parser<RawData> myParser = new ConcreteParser();
+		RawData rawData = myParser.parse(args[0]);
+		
+		// Process the read data and solve it
+		Solver<RawData, TreatedData> mySolver = new ConcreteSolver();
+		TreatedData treatedData = mySolver.solve(rawData);
+		
+		// Write this to an output file
+		Writer<TreatedData> myWriter = new ConcreteWriter();
+		myWriter.write(args[1], treatedData);
 	}
 }
