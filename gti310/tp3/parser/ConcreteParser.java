@@ -4,14 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import gti310.tp3.entities.RawData;
 
 public class ConcreteParser implements Parser<RawData> {
 
-	private List<Integer[]> livraisons = new ArrayList<Integer[]>();
+	private HashMap<Integer, Integer[]> noeuds = new HashMap<>();
 
 	@Override
 	public RawData parse(String filename) throws IOException {
@@ -28,7 +27,7 @@ public class ConcreteParser implements Parser<RawData> {
 		Integer nbrSommets = null;
 		Integer valPourInfinie = null;
 		Integer sommetDepart = null;
-		RawData rawData = new RawData(nbrSommets, valPourInfinie, sommetDepart, livraisons);
+		RawData rawData = new RawData(nbrSommets, valPourInfinie, sommetDepart, noeuds);
 
 		// Read the file line by line until "$" is encounterLineed
 		while ((strLine = br.readLine()) != null && !strLine.equals("$")) {
@@ -46,7 +45,7 @@ public class ConcreteParser implements Parser<RawData> {
 					rawData.setSommetDepart(Integer.parseInt(strLine));
 			}
 			if (counterLine > 3) {
-				storeShipmentInShipmentsArray(strLine);
+				storeNodes(strLine);
 			}
 			counterLine++;
 		}
@@ -60,25 +59,25 @@ public class ConcreteParser implements Parser<RawData> {
 	/**
 	 * Returns 3 integers contained in the line currently read
 	 */
-	private void storeShipmentInShipmentsArray(String strLine) {
+	private void storeNodes(String strLine) {
 		// Create an Integer array, size of 3 values
-		Integer[] livraison = new Integer[3];
+		Integer[] noeud = new Integer[3];
 
-		// Store the first Integer
+		// Store the source -- first Integer
 		Integer firstTab = strLine.indexOf("\t");
-		livraison[0] = Integer.parseInt(strLine.substring(0, firstTab));
+		noeud[0] = Integer.parseInt(strLine.substring(0, firstTab));
 		// Cut the string
 		strLine = strLine.substring(firstTab + 1);
-		// Store the second Integer
+		// Store the destination -- second Integer
 		Integer secondTab = strLine.indexOf("\t");
-		livraison[1] = Integer.parseInt(strLine.substring(0, secondTab));
+		noeud[1] = Integer.parseInt(strLine.substring(0, secondTab));
 		// Cut the string
 		strLine = strLine.substring(secondTab + 1);
-		// Store the third Integer
-		livraison[2] = Integer.parseInt(strLine);
-
+		// Store the weight -- third Integer
+		noeud[2] = Integer.parseInt(strLine);
+		
 		// Store the shipment in the shipments array
-		livraisons.add(livraison);
+		noeuds.put(noeud[0], noeud);
 	}
 
 }

@@ -45,6 +45,6 @@ public class Application {
 		Writer<TreatedData> myWriter = new ConcreteWriter();
 		myWriter.write(args[1], treatedData);
 
-		System.out.println("Nombre de livraisons: " + rawData.getLivraisons().size());
+		System.out.println("Nombre de chemins: " + rawData.getNoeuds().size());
 	}
 }

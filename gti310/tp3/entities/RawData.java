@@ -1,20 +1,35 @@
 package gti310.tp3.entities;
 
-import java.util.List;
+import java.util.HashMap;
 
 public class RawData {
 
 	private Integer nbrSommets;
 	private Integer valPourInfinie;
 	private Integer sommetDepart;
-	private List<Integer[]> livraisons;
+	private HashMap<Integer, Integer[]> noeuds;
 
-	public RawData(Integer nbrSommets, Integer valPourInfinie, Integer sommetDepart, List<Integer[]> livraisons) {
+	public RawData(Integer nbrSommets, Integer valPourInfinie, Integer sommetDepart,
+			HashMap<Integer, Integer[]> noeuds) {
 		super();
 		this.nbrSommets = nbrSommets;
 		this.valPourInfinie = valPourInfinie;
 		this.sommetDepart = sommetDepart;
-		this.livraisons = livraisons;
+		this.noeuds = noeuds;
+	}
+
+	// Custom methods
+
+	public Integer getNoeudSource(Integer[] noeud) {
+		return noeud[0];
+	}
+
+	public Integer getNoeudDestination(Integer[] noeud) {
+		return noeud[1];
+	}
+
+	public Integer getNoeudPoids(Integer[] noeud) {
+		return noeud[2];
 	}
 
 	public Integer getNbrSommets() {
@@ -41,25 +56,11 @@ public class RawData {
 		this.sommetDepart = sommetDepart;
 	}
 
-	public List<Integer[]> getLivraisons() {
-		return livraisons;
+	public HashMap<Integer, Integer[]> getNoeuds() {
+		return noeuds;
 	}
 
-	public void setLivraisons(List<Integer[]> livraisons) {
-		this.livraisons = livraisons;
-	}
-	
-	// Custom methods
-	
-	public Integer getLivraisonSource(Integer[] livraison) {
-		return livraison[0];
-	}
-
-	public Integer getLivraisonDestination(Integer[] livraison) {
-		return livraison[1];
-	}
-
-	public Integer getLivraisonPoids(Integer[] livraison) {
-		return livraison[2];
+	public void setNoeuds(HashMap<Integer, Integer[]> noeuds) {
+		this.noeuds = noeuds;
 	}
 }
