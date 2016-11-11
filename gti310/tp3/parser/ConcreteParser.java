@@ -43,7 +43,7 @@ public class ConcreteParser implements Parser<RawData> {
 				if (strLine.equals(""))
 					rawData.setSommetDepart(1);
 				else
-					rawData.setValPourInfinie(Integer.parseInt(strLine));
+					rawData.setSommetDepart(Integer.parseInt(strLine));
 			}
 			if (counterLine > 3) {
 				storeShipmentInShipmentsArray(strLine);
