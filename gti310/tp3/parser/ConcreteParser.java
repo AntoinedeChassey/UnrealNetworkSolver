@@ -22,7 +22,7 @@ public class ConcreteParser implements Parser<RawData> {
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
 		String strLine;
-		int counter = 1;
+		int counterLine = 1;
 
 		// Create a new RawData object
 		Integer nbrSommets = null;
@@ -30,24 +30,25 @@ public class ConcreteParser implements Parser<RawData> {
 		Integer sommetDepart = null;
 		RawData rawData = new RawData(nbrSommets, valPourInfinie, sommetDepart, livraisons);
 
-		// Read the file line by line until "$" is encountered
+		// Read the file line by line until "$" is encounterLineed
 		while ((strLine = br.readLine()) != null && !strLine.equals("$")) {
-			if (counter == 1) {
+			if (counterLine == 1) {
 				rawData.setNbrSommets(Integer.parseInt(strLine));
 			}
-			if (counter == 2) {
+			if (counterLine == 2) {
 				rawData.setValPourInfinie(Integer.parseInt(strLine));
 			}
-			if (counter == 3) {
+			if (counterLine == 3) {
+				// If no summit, set it to 1
 				if (strLine.equals(""))
-					rawData.setSommetDepart(0);
+					rawData.setSommetDepart(1);
 				else
 					rawData.setValPourInfinie(Integer.parseInt(strLine));
 			}
-			if (counter > 3) {
+			if (counterLine > 3) {
 				storeShipmentInShipmentsArray(strLine);
 			}
-			counter++;
+			counterLine++;
 		}
 
 		// Close the input stream
