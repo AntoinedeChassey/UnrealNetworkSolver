@@ -31,20 +31,31 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 	public void init(RawData input) {
 		livraisons = input.getLivraisons();
 		sommetDepart = input.getSommetDepart();
-		for (Integer[] livraison : livraisons)
-			System.out.println(input.getLivraisonPoids(livraison));
 	}
 
 	@Override
 	public TreatedData solve(RawData input) {
 		// TODO Auto-generated method stub
 		init(input);
-
-		TreatedData treatedData = new TreatedData(sommetDepart, chemins);
-		System.out.println(treatedData.getSommetDepart());
 		// Create a 2 dimension matrix
 		// Integer[][] graph = new Integer[input.getLivraisons().size()][2];
 
+		for (Integer[] livraison : livraisons) {
+			// Create an Integer array, size of 2 values (parent & weight)
+			Integer[] chemin = new Integer[2];
+			if (sommetDepart == input.getLivraisonSource(livraison)) {
+				// Set parent to -1
+				chemin[0] = -1;
+				// Set weight to 0
+				chemin[1] = 0;
+				// Add the path in paths
+				chemins.add(chemin);
+			} else {
+				// chemin[0] = get
+			}
+		}
+
+		TreatedData treatedData = new TreatedData(sommetDepart, chemins);
 		return treatedData;
 	}
 
