@@ -7,12 +7,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import gti310.tp3.entities.Node;
+import gti310.tp3.entities.InputNode;
 import gti310.tp3.entities.RawData;
 
 public class ConcreteParser implements Parser<RawData> {
 
-	private List<Node<Integer, Integer[]>> noeuds = new ArrayList<>();
+	private List<InputNode<Integer, Integer[]>> noeuds = new ArrayList<>();
 
 	@Override
 	public RawData parse(String filename) throws IOException {
@@ -62,7 +62,7 @@ public class ConcreteParser implements Parser<RawData> {
 	 * Returns
 	 */
 	private void storeNodes(String strLine) {
-		Node<Integer, Integer[]> noeud = new Node<Integer, Integer[]>();
+		InputNode<Integer, Integer[]> noeud = new InputNode<Integer, Integer[]>();
 
 		Integer[] noeudParams = new Integer[2];
 		// Store the source -- first Integer

@@ -3,3 +3,6 @@
 /RawData.class
 /Nodes.class
 /Node.class
+/Path.class
+/InputNode.class
+/OutputNode.class

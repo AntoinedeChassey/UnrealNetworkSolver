@@ -5,28 +5,12 @@ import java.util.List;
 public class TreatedData {
 
 	private Integer sommetDepart;
-	private List<Integer[]> chemins;
+	private List<OutputNode<Integer, Integer>> noeuds;
 
-	public TreatedData(Integer sommetDepart, List<Integer[]> chemins) {
+	public TreatedData(Integer sommetDepart, List<OutputNode<Integer, Integer>> noeuds) {
 		super();
 		this.sommetDepart = sommetDepart;
-		this.chemins = chemins;
-	}
-
-	public Integer getSommetDepart() {
-		return sommetDepart;
-	}
-
-	public void setSommetDepart(Integer sommetDepart) {
-		this.sommetDepart = sommetDepart;
-	}
-
-	public List<Integer[]> getchemins() {
-		return chemins;
-	}
-
-	public void setchemins(List<Integer[]> chemins) {
-		this.chemins = chemins;
+		this.noeuds = noeuds;
 	}
 
 	// Custom methods
@@ -37,5 +21,21 @@ public class TreatedData {
 
 	public Integer getCheminPoids(Integer[] chemin) {
 		return chemin[1];
+	}
+
+	public Integer getSommetDepart() {
+		return sommetDepart;
+	}
+
+	public void setSommetDepart(Integer sommetDepart) {
+		this.sommetDepart = sommetDepart;
+	}
+
+	public List<OutputNode<Integer, Integer>> getNoeuds() {
+		return noeuds;
+	}
+
+	public void setNoeuds(List<OutputNode<Integer, Integer>> noeuds) {
+		this.noeuds = noeuds;
 	}
 }
