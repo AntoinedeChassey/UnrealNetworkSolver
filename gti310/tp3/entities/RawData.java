@@ -1,24 +1,24 @@
 package gti310.tp3.entities;
 
-import java.util.HashMap;
+import java.util.List;
 
 public class RawData {
 
 	private Integer nbrSommets;
 	private Integer valPourInfinie;
 	private Integer sommetDepart;
-	private HashMap<Integer, Integer[]> noeuds;
+	private List<Node<Integer, Integer[]>> noeuds;
 
 	public RawData(Integer nbrSommets, Integer valPourInfinie, Integer sommetDepart,
-			HashMap<Integer, Integer[]> noeuds) {
+			List<Node<Integer, Integer[]>> noeuds) {
 		super();
 		this.nbrSommets = nbrSommets;
 		this.valPourInfinie = valPourInfinie;
 		this.sommetDepart = sommetDepart;
 		this.noeuds = noeuds;
 	}
-
-	// Custom methods
+	
+	// Custom methods	
 
 	public Integer getNoeudSource(Integer[] noeud) {
 		return noeud[0];
@@ -56,11 +56,11 @@ public class RawData {
 		this.sommetDepart = sommetDepart;
 	}
 
-	public HashMap<Integer, Integer[]> getNoeuds() {
+	public List<Node<Integer, Integer[]>> getNoeuds() {
 		return noeuds;
 	}
 
-	public void setNoeuds(HashMap<Integer, Integer[]> noeuds) {
+	public void setNoeuds(List<Node<Integer, Integer[]>> noeuds) {
 		this.noeuds = noeuds;
 	}
 }

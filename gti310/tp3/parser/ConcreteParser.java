@@ -4,13 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
+import gti310.tp3.entities.Node;
 import gti310.tp3.entities.RawData;
 
 public class ConcreteParser implements Parser<RawData> {
 
-	private HashMap<Integer, Integer[]> noeuds = new HashMap<>();
+	private List<Node<Integer, Integer[]>> noeuds = new ArrayList<>();
 
 	@Override
 	public RawData parse(String filename) throws IOException {
@@ -57,27 +59,27 @@ public class ConcreteParser implements Parser<RawData> {
 	}
 
 	/**
-	 * Returns 3 integers contained in the line currently read
+	 * Returns
 	 */
 	private void storeNodes(String strLine) {
-		// Create an Integer array, size of 3 values
-		Integer[] noeud = new Integer[3];
+		Node<Integer, Integer[]> noeud = new Node<Integer, Integer[]>();
 
+		Integer[] noeudParams = new Integer[2];
 		// Store the source -- first Integer
 		Integer firstTab = strLine.indexOf("\t");
-		noeud[0] = Integer.parseInt(strLine.substring(0, firstTab));
+		noeud.source = Integer.parseInt(strLine.substring(0, firstTab));
 		// Cut the string
 		strLine = strLine.substring(firstTab + 1);
 		// Store the destination -- second Integer
 		Integer secondTab = strLine.indexOf("\t");
-		noeud[1] = Integer.parseInt(strLine.substring(0, secondTab));
+		noeudParams[0] = Integer.parseInt(strLine.substring(0, secondTab));
 		// Cut the string
 		strLine = strLine.substring(secondTab + 1);
 		// Store the weight -- third Integer
-		noeud[2] = Integer.parseInt(strLine);
-		
-		// Store the shipment in the shipments array
-		noeuds.put(noeud[0], noeud);
+		noeudParams[1] = Integer.parseInt(strLine);
+
+		noeud.destinationEtPoids = noeudParams;
+		noeuds.add(noeud);
 	}
 
 }
