@@ -3,15 +3,15 @@ package gti310.tp3.solver;
 import java.util.ArrayList;
 import java.util.List;
 
-import gti310.tp3.entities.InputNode;
-import gti310.tp3.entities.OutputNode;
+import gti310.tp3.entities.Node;
+import gti310.tp3.entities.Path;
 import gti310.tp3.entities.RawData;
 import gti310.tp3.entities.TreatedData;
 
 public class ConcreteSolver implements Solver<RawData, TreatedData> {
 
-	private List<InputNode<Integer, Integer, Integer>> noeuds_entree;
-	private List<OutputNode<Integer, Integer>> noeuds_sortie = new ArrayList<>();
+	private List<Node<Integer, Integer, Integer>> noeuds_entree;
+	private List<Path<Integer, Integer>> noeuds_sortie = new ArrayList<>();
 	private static Integer SOMMET_DEPART;
 	private static Integer INFINIE;
 
@@ -42,19 +42,19 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		// TODO Auto-generated method stub
 		init(input);
 
-		// for (InputNode<Integer, Integer[]> noeud : noeuds_entree) {
+		// for (Node<Integer, Integer[]> noeud : noeuds_entree) {
 		// System.out.println(noeud.source);
 		// }
 
-		// for (Iterator<InputNode<Integer, Integer[]>> i =
+		// for (Iterator<Node<Integer, Integer[]>> i =
 		// noeuds_entree.iterator(); i.hasNext();) {
-		// InputNode<Integer, Integer[]> noeud = i.next();
+		// Node<Integer, Integer[]> noeud = i.next();
 		// Integer source = noeud.source;
 		// Integer tmpSource = source;
 		// Integer poidsMini = input.getValPourInfinie();
 		//
-		// // OutputNode object
-		// OutputNode<Integer, Integer> noeudRetenu = new OutputNode<>();
+		// // Path object
+		// Path<Integer, Integer> noeudRetenu = new Path<>();
 		// Integer poids = 0;
 		// while (tmpSource == noeud.source) {
 		// Integer destination = noeud.destinationEtPoids[0];
@@ -92,7 +92,7 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		int k = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				InputNode<Integer, Integer, Integer> noeud = noeuds_entree.get(k);
+				Node<Integer, Integer, Integer> noeud = noeuds_entree.get(k);
 				Integer source = noeud.source;
 				Integer destination = noeud.destination;
 				Integer poids = noeud.poids;
@@ -110,9 +110,9 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 			System.out.println();
 		}
 
-		// for (Iterator<InputNode<Integer, Integer, Integer>> k =
+		// for (Iterator<Node<Integer, Integer, Integer>> k =
 		// noeuds_entree.iterator(); k.hasNext();) {
-		// InputNode<Integer, Integer, Integer> noeud = k.next();
+		// Node<Integer, Integer, Integer> noeud = k.next();
 		// Integer source = noeud.source;
 		// Integer destination = noeud.destination;
 		// Integer poids = noeud.poids;
@@ -123,8 +123,8 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		// matrix[source][destination] = poids;
 		// if (matrix[source][destination] == 0)
 		// matrix[source][destination] = INFINIE;
-		// // OutputNode object
-		// OutputNode<Integer, Integer> noeudRetenu = new OutputNode<>();
+		// // Path object
+		// Path<Integer, Integer> noeudRetenu = new Path<>();
 		// }
 
 		for (int i = 0; i < matrix.length; i++) {
@@ -165,12 +165,13 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 				}
 			}
 		}
-		
-		System.out.print("\nBest distance: ");
+
+		// Printing the distance array
+		System.out.print("\nDistance array: ");
 		for (int i = 0; i < size; i++) {
 			System.out.print("|" + distance[i]);
 		}
-		System.out.print("|" + "\n");
+		System.out.print("|" + "\n\n");
 
 		// Printing the paths
 		for (int i = 0; i < size; i++) {
@@ -184,10 +185,9 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 			System.out.println();
 		}
 
-		//
-		// for (Iterator<InputNode<Integer, Integer[]>> i =
+		// for (Iterator<Node<Integer, Integer[]>> i =
 		// noeuds_entree.iterator(); i.hasNext();) {
-		// InputNode<Integer, Integer[]> noeud = i.next();
+		// Node<Integer, Integer[]> noeud = i.next();
 		// System.out.println(noeud.source);
 		// }
 		TreatedData treatedData = new TreatedData(SOMMET_DEPART, noeuds_sortie);

@@ -7,10 +7,10 @@ public class RawData {
 	private Integer nbrSommets;
 	private Integer valPourInfinie;
 	private Integer sommetDepart;
-	private List<InputNode<Integer, Integer, Integer>> noeuds;
+	private List<Node<Integer, Integer, Integer>> noeuds;
 
 	public RawData(Integer nbrSommets, Integer valPourInfinie, Integer sommetDepart,
-			List<InputNode<Integer, Integer, Integer>> noeuds) {
+			List<Node<Integer, Integer, Integer>> noeuds) {
 		super();
 		this.nbrSommets = nbrSommets;
 		this.valPourInfinie = valPourInfinie;
@@ -42,11 +42,11 @@ public class RawData {
 		this.sommetDepart = sommetDepart;
 	}
 
-	public List<InputNode<Integer, Integer, Integer>> getNoeuds() {
+	public List<Node<Integer, Integer, Integer>> getNoeuds() {
 		return noeuds;
 	}
 
-	public void setNoeuds(List<InputNode<Integer, Integer, Integer>> noeuds) {
+	public void setNoeuds(List<Node<Integer, Integer, Integer>> noeuds) {
 		this.noeuds = noeuds;
 	}
 }

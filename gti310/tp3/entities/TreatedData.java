@@ -5,9 +5,9 @@ import java.util.List;
 public class TreatedData {
 
 	private Integer sommetDepart;
-	private List<OutputNode<Integer, Integer>> noeuds;
+	private List<Path<Integer, Integer>> noeuds;
 
-	public TreatedData(Integer sommetDepart, List<OutputNode<Integer, Integer>> noeuds) {
+	public TreatedData(Integer sommetDepart, List<Path<Integer, Integer>> noeuds) {
 		super();
 		this.sommetDepart = sommetDepart;
 		this.noeuds = noeuds;
@@ -31,11 +31,11 @@ public class TreatedData {
 		this.sommetDepart = sommetDepart;
 	}
 
-	public List<OutputNode<Integer, Integer>> getNoeuds() {
+	public List<Path<Integer, Integer>> getNoeuds() {
 		return noeuds;
 	}
 
-	public void setNoeuds(List<OutputNode<Integer, Integer>> noeuds) {
+	public void setNoeuds(List<Path<Integer, Integer>> noeuds) {
 		this.noeuds = noeuds;
 	}
 }
