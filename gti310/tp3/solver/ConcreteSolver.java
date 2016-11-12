@@ -10,8 +10,8 @@ import gti310.tp3.entities.TreatedData;
 
 public class ConcreteSolver implements Solver<RawData, TreatedData> {
 
-	private List<Node<Integer, Integer, Integer>> noeuds_entree;
-	private List<Path<Integer, Integer>> noeuds_sortie = new ArrayList<>();
+	private List<Node<Integer, Integer, Integer>> noeuds;
+	private List<Path<Integer, Integer>> paths = new ArrayList<>();
 	private static Integer SOMMET_DEPART;
 	private static Integer INFINIE;
 
@@ -32,9 +32,12 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 	 * @param input
 	 */
 	public void init(RawData input) {
-		noeuds_entree = input.getNoeuds();
+		noeuds = input.getNoeuds();
 		INFINIE = input.getValPourInfinie();
-		SOMMET_DEPART = input.getSommetDepart();
+		SOMMET_DEPART = input.getSommetDepart() - 1; // Taking -1 to match the
+														// correct matrix index
+
+		System.out.println("Starting node (matrix position): " + SOMMET_DEPART + "\n");
 	}
 
 	@Override
@@ -42,12 +45,12 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		// TODO Auto-generated method stub
 		init(input);
 
-		// for (Node<Integer, Integer[]> noeud : noeuds_entree) {
+		// for (Node<Integer, Integer[]> noeud : noeuds) {
 		// System.out.println(noeud.source);
 		// }
 
 		// for (Iterator<Node<Integer, Integer[]>> i =
-		// noeuds_entree.iterator(); i.hasNext();) {
+		// noeuds.iterator(); i.hasNext();) {
 		// Node<Integer, Integer[]> noeud = i.next();
 		// Integer source = noeud.source;
 		// Integer tmpSource = source;
@@ -70,13 +73,13 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		// break;
 		// }
 		// poidsTotal += poids;
-		// noeuds_sortie.add(noeudRetenu);
+		// paths.add(noeudRetenu);
 		// System.out.println("Poids mini pour le noeud " + source + ": " +
 		// poidsMini);
 		// }
 		// System.out.println("Poids total du trajet: " + poidsTotal);
 		// TreatedData treatedData = new TreatedData(sommetDepart,
-		// noeuds_sortie);
+		// paths);
 		// return treatedData;
 		// }
 
@@ -92,7 +95,7 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		int k = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				Node<Integer, Integer, Integer> noeud = noeuds_entree.get(k);
+				Node<Integer, Integer, Integer> noeud = noeuds.get(k);
 				Integer source = noeud.source;
 				Integer destination = noeud.destination;
 				Integer poids = noeud.poids;
@@ -103,15 +106,15 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 				if (matrix[i][j] == 0)
 					matrix[i][j] = INFINIE;
 				System.out.print(matrix[i][j] + " ");
-				// Check index
-				if (k < noeuds_entree.size() - 1)
+				// Checking index
+				if (k < noeuds.size() - 1)
 					k++;
 			}
 			System.out.println();
 		}
 
 		// for (Iterator<Node<Integer, Integer, Integer>> k =
-		// noeuds_entree.iterator(); k.hasNext();) {
+		// noeuds.iterator(); k.hasNext();) {
 		// Node<Integer, Integer, Integer> noeud = k.next();
 		// Integer source = noeud.source;
 		// Integer destination = noeud.destination;
@@ -171,26 +174,38 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		for (int i = 0; i < size; i++) {
 			System.out.print("|" + distance[i]);
 		}
-		System.out.print("|" + "\n\n");
+		System.out.print("|" + "\n");
 
 		// Printing the paths
+		// for (int i = 0; i < size; i++) {
+		// System.out.println("Path = " + (i + 1));
+		// int j = i;
+		// do {
+		// j = preD[j];
+		// System.out.print(" <- " + (j + 1));
+		// } while (j != 0);
+		// System.out.println();
+		// }
+
+		int j;
 		for (int i = 0; i < size; i++) {
-			int j;
-			System.out.println("Path = " + i);
+			System.out.print("Path = " + (i + 1));
 			j = i;
 			do {
 				j = preD[j];
-				System.out.println(" <- " + j);
+				System.out.print(" <- " + (j + 1));
 			} while (j != 0);
 			System.out.println();
 		}
 
-		// for (Iterator<Node<Integer, Integer[]>> i =
-		// noeuds_entree.iterator(); i.hasNext();) {
-		// Node<Integer, Integer[]> noeud = i.next();
-		// System.out.println(noeud.source);
-		// }
-		TreatedData treatedData = new TreatedData(SOMMET_DEPART, noeuds_sortie);
+		// Create the path object
+		for (int i = 0; i < size; i++) {
+			Path<Integer, Integer> path = new Path<>();
+			path.parent = preD[i] + 1;
+			path.poids = distance[i];
+			paths.add(path);
+		}
+		TreatedData treatedData = new TreatedData(SOMMET_DEPART + 1, paths);
 		return treatedData;
 	}
 }

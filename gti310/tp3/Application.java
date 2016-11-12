@@ -31,7 +31,7 @@ public class Application {
 	 * @throws IOException
 	 */
 	public static void main(String args[]) throws IOException {
-		System.out.println("Unreal Networks Solver !");
+		System.out.println("Unreal Networks Solver !\n");
 
 		// Read the file and parse the contained data in an accessible format
 		Parser<RawData> myParser = new ConcreteParser();

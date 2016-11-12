@@ -26,9 +26,11 @@ public class ConcreteWriter implements Writer<TreatedData> {
 
 		// Write in the file
 		bw.write(output.getSommetDepart() + "\n");
-		List<Path<Integer, Integer>> noeuds = output.getNoeuds();
-		for (Path<Integer, Integer> noeud : noeuds) {
-			bw.write(noeud.parent + "\t" + noeud.poids + "\n");
+		List<Path<Integer, Integer>> paths = output.getNoeuds();
+		for (Path<Integer, Integer> path : paths) {
+			if (path.poids == 0)
+				path.parent = -1;
+			bw.write(path.parent + "\t" + path.poids + "\n");
 		}
 
 		// Close the file
