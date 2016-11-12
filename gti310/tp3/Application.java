@@ -44,7 +44,5 @@ public class Application {
 		// Write this to an output file
 		Writer<TreatedData> myWriter = new ConcreteWriter();
 		myWriter.write(args[1], treatedData);
-
-		System.out.println("Nombre de chemins: " + rawData.getNoeuds().size());
 	}
 }

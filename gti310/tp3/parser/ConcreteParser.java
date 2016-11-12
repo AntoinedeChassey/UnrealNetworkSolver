@@ -12,7 +12,7 @@ import gti310.tp3.entities.RawData;
 
 public class ConcreteParser implements Parser<RawData> {
 
-	private List<InputNode<Integer, Integer[]>> noeuds = new ArrayList<>();
+	private List<InputNode<Integer, Integer, Integer>> noeuds = new ArrayList<>();
 
 	@Override
 	public RawData parse(String filename) throws IOException {
@@ -62,9 +62,8 @@ public class ConcreteParser implements Parser<RawData> {
 	 * Returns
 	 */
 	private void storeNodes(String strLine) {
-		InputNode<Integer, Integer[]> noeud = new InputNode<Integer, Integer[]>();
+		InputNode<Integer, Integer, Integer> noeud = new InputNode<Integer, Integer, Integer>();
 
-		Integer[] noeudParams = new Integer[2];
 		// Store the source -- first Integer
 		Integer firstTab = strLine.indexOf("\t");
 		noeud.source = Integer.parseInt(strLine.substring(0, firstTab));
@@ -72,13 +71,12 @@ public class ConcreteParser implements Parser<RawData> {
 		strLine = strLine.substring(firstTab + 1);
 		// Store the destination -- second Integer
 		Integer secondTab = strLine.indexOf("\t");
-		noeudParams[0] = Integer.parseInt(strLine.substring(0, secondTab));
+		noeud.destination = Integer.parseInt(strLine.substring(0, secondTab));
 		// Cut the string
 		strLine = strLine.substring(secondTab + 1);
 		// Store the weight -- third Integer
-		noeudParams[1] = Integer.parseInt(strLine);
+		noeud.poids = Integer.parseInt(strLine);
 
-		noeud.destinationEtPoids = noeudParams;
 		noeuds.add(noeud);
 	}
 
