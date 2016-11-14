@@ -94,11 +94,13 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		// Build the matrix
 		int k = 0;
 		for (int i = 0; i < size; i++) {
+			visited[i] = 0;
+			preD[i] = 0;
 			for (int j = 0; j < size; j++) {
 				Node<Integer, Integer, Integer> noeud = noeuds.get(k);
-				Integer source = noeud.source;
-				Integer destination = noeud.destination;
-				Integer poids = noeud.poids;
+				int source = noeud.source;
+				int destination = noeud.destination;
+				int poids = noeud.poids;
 				// Set index to avoid ArrayIndexOutOfBoundsException
 				source += -1;
 				destination += -1;
@@ -130,40 +132,36 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		// Path<Integer, Integer> noeudRetenu = new Path<>();
 		// }
 
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[i].length; j++) {
-				System.out.print(matrix[i][j] + " ");
-			}
-			System.out.println();
-		}
-
-		for (int i = 0; i < size; i++) {
-			visited[i] = 0;
-			preD[i] = 0;
-		}
+		// // Print the matrix
+		// for (int i = 0; i < matrix.length; i++) {
+		// for (int j = 0; j < matrix[i].length; j++) {
+		// System.out.print(matrix[i][j] + " ");
+		// }
+		// System.out.println();
+		// }
 
 		// Set the starting node
 		distance = matrix[SOMMET_DEPART];
 		distance[SOMMET_DEPART] = 0;
 		visited[SOMMET_DEPART] = 1;
 
-		for (int i = 0; i < size; i++) {
+		for (int w = 0; w < size; w++) {
 			min = INFINIE;
-			for (int j = 0; j < size; j++) {
-				if (min > distance[j] && visited[j] != 1) {
-					min = distance[j];
-					nextNode = j;
+			for (int i = 0; i < size; i++) {
+				if (min > distance[i] && visited[i] != 1) {
+					min = distance[i];
+					nextNode = i;
 				}
 			}
 
 			visited[nextNode] = 1;
 
 			// Start the algorithm
-			for (int c = 0; c < size; c++) {
-				if (visited[c] != 1) {
-					if (min + matrix[nextNode][c] < distance[c]) {
-						distance[c] = min + matrix[nextNode][c];
-						preD[c] = nextNode;
+			for (int i = 0; i < size; i++) {
+				if (visited[i] != 1) {
+					if (min + matrix[nextNode][i] < distance[i]) {
+						distance[i] = min + matrix[nextNode][i];
+						preD[i] = nextNode;
 					}
 				}
 			}
