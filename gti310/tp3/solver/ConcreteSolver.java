@@ -144,7 +144,7 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		distance = matrix[SOMMET_DEPART];
 		distance[SOMMET_DEPART] = 0;
 		visited[SOMMET_DEPART] = 1;
-
+		
 		for (int w = 0; w < size; w++) {
 			min = INFINIE;
 			for (int i = 0; i < size; i++) {
@@ -189,10 +189,10 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		for (int i = 0; i < size; i++) {
 			System.out.print("Path = " + (i + 1));
 			j = i;
-			do {
-				j = preD[j];
-				System.out.print(" <- " + (j + 1));
-			} while (j != 0);
+			// do {
+			j = preD[j];
+			System.out.print(" <- " + (j + 1));
+			// } while (j != 1);
 			System.out.println();
 		}
 
