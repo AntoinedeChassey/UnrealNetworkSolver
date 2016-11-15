@@ -71,6 +71,10 @@ public class ConcreteParser implements Parser<RawData> {
 							rawData.setSommetDepart(1);
 						else
 							rawData.setSommetDepart(Integer.parseInt(strLine));
+						if ((rawData.getSommetDepart() > 0 && rawData.getSommetDepart() <= nbrSommets) == false) {
+							System.err.println("Le sommet de départ n'est pas correct.");
+							System.exit(1);
+						}
 					} catch (NumberFormatException e) {
 						// e.printStackTrace();
 						System.err.println("Le sommet de départ est incorrect.");
