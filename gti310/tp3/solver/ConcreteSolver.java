@@ -36,8 +36,7 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		INFINIE = input.getValPourInfinie();
 		SOMMET_DEPART = input.getSommetDepart() - 1; // Taking -1 to match the
 														// correct matrix index
-
-		System.out.println("Starting node (matrix position): " + SOMMET_DEPART + "\n");
+		System.out.println("Starting node: " + (SOMMET_DEPART + 1) + " (" + SOMMET_DEPART + " for the matrix index)\n");
 	}
 
 	@Override
@@ -95,7 +94,7 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		int k = 0;
 		for (int i = 0; i < size; i++) {
 			visited[i] = 0;
-			preD[i] = 0;
+			preD[i] = SOMMET_DEPART;
 			for (int j = 0; j < size; j++) {
 				Node<Integer, Integer, Integer> noeud = noeuds.get(k);
 				int source = noeud.source;
@@ -144,7 +143,7 @@ public class ConcreteSolver implements Solver<RawData, TreatedData> {
 		distance = matrix[SOMMET_DEPART];
 		distance[SOMMET_DEPART] = 0;
 		visited[SOMMET_DEPART] = 1;
-		
+
 		for (int w = 0; w < size; w++) {
 			min = INFINIE;
 			for (int i = 0; i < size; i++) {
